@@ -14,6 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            AdminSeeder::class,
+           // UserSeeder::class,
+        ]);
+
         User::factory(10)->create();
 
         User::factory()->create([

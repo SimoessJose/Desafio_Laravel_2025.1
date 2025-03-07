@@ -22,6 +22,7 @@ class Product extends Model
         'image',
         'quantity',
         'category',
+        'user_id',
     ];
 
 
