@@ -15,8 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->date('date_birth');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('address');
+            $table->string('number')->unique();
+            $table->string('cpf')->unique();
+            $table->float('balance');
+            $table->string('image')->nullable();
+            $table->foreignId('admin_id')->constrained()->onDelete('no action');
             $table->rememberToken();
             $table->timestamps();
         });
