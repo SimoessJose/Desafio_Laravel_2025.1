@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->date('date_birth');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('cpf')->unique();
             $table->string('image')->nullable();
-            $table->foreignId('admin_id')->constrained()->onDelete('no action' );
+            $table->foreignId('admin_id')->nullable()->constrained()->onDelete('no action' );
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use AddressInfo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -10,7 +11,7 @@ use App\Models\Admin;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * The current password being used by the factory.
@@ -35,7 +36,6 @@ class UserFactory extends Factory
             'date_birth' => fake()->date(),
             'address' => fake()->address(),
             'image' => '',
-            'balance' => 0,
             'admin_id' => Admin::inRandomOrder()->value('id'),
         ];
     }
