@@ -14,9 +14,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            AdminSeeder::class,
-           // UserSeeder::class,
+        User::factory()->create([
+            'name' => 'Super User',
+            'email' => 'user@user',
+            'cpf' => '25545678901',
+            'password' => 'user', 
+            'number' => '12987444321',
+            'address' => '1235 User St',
+            'date_birth' => '1991-01-01',
+            'image' => '',
+            'balance' => 0,
+            'admin_id' => Admin::inRandomOrder()->value('id'),
         ]);
 
         User::factory(10)->create();
