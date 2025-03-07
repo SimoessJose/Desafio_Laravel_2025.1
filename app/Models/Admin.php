@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+
+class Admin extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,7 @@ class Admin extends Model
         'date_birth',
         'address',
         'image',
+        'admin_id',
     ];
 
     /**

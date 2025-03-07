@@ -16,6 +16,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        if(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('auth.login');
     }
 
@@ -24,11 +27,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        if (Auth('web')->attempt($request->only('email', 'password'))) {
+            return redirect()->route('dashboard');
+        }
+        if (Auth('admin')->attempt($request->only('email', 'password'))) {
+            return redirect()->route('admin.dashboard');
+        }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return back()->withErrors(['email' => 'Credenciais inválidas']);
     }
 
     /**
