@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
        if(Auth('web')->attempt($request->only('email', 'password'))){
-           return redirect()->route('dashboard');
+           return redirect()->route('index');
         }
            elseif(Auth('admin')->attempt($request->only('email', 'password'))){
                return redirect()->route('admin.dashboard');
