@@ -38,6 +38,7 @@
                                 {{ $product->description }}
                             </p>
                         </div>
+                        
                         <div class="flex -mx-2 justify-center self-baseline">
                             <div class="w-1/2 px-2 mt-24">
                                 <button
