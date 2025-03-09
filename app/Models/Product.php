@@ -25,5 +25,7 @@ class Product extends Model
         'user_id',
     ];
 
-
+    public function creator(){
+        return $this->belongsTo(Product::class, 'user_id');
+    }
 }
