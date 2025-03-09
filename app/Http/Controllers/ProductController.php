@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use function view;
 
 class ProductController extends Controller
 {
@@ -25,11 +26,30 @@ class ProductController extends Controller
         return view('user.landingPage', compact('products'));
     }
 
-    public function search(Request $request)
+
+public function search(Request $request)
 {
-    $search = $request->input('query');
-    $products = Product::where('name', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")->paginate(8);
-    return view('user.landingPage', compact('products'));
+    $search = $request->input('query');   
+    $categoryId = $request->input('category');  
+
+    $query = Product::query();
+
+    if (!empty($search)) {
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%");
+        });
+    }
+
+    if (!empty($categoryId)) {
+        $query->where('category', $categoryId);
+    }
+
+    $products = $query->paginate(8);
+
+    $categories = Product::select('category')->distinct()->pluck('category');
+
+
+    return view('user.landingPage', compact('products', 'categories'));
 }
 
 
