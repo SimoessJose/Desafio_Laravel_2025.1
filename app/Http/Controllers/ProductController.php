@@ -5,16 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        //
+        $products = Product::paginate(8);
+    
+         if (Auth::guard('admin')->check()) {
+             return view('admin.productTable', compact('products'));
+         }
+        
+        return view('user.landingPage', compact('products'));
     }
+
+    public function search(Request $request)
+{
+    $search = $request->input('query');
+    $products = Product::where('name', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")->paginate(8);
+    return view('user.landingPage', compact('products'));
+}
+
 
     /**
      * Show the form for creating a new resource.
