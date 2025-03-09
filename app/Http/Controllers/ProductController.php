@@ -52,6 +52,11 @@ public function search(Request $request)
     return view('user.landingPage', compact('products', 'categories'));
 }
 
+public function show(Product $product){ 
+
+    return view('user.productView', compact('product'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -68,15 +73,6 @@ public function search(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
