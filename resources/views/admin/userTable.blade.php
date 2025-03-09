@@ -70,7 +70,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-wrap text-sm font-medium">
                                             <a href="#" class="ml-2 text-green-600 hover:text-green-900">View</a>
-                                            <a href="#" class="ml-2 text-indigo-600 hover:text-indigo-900">Edit</a>
+                                            <a href="{{ route('updateProfile', $users->id) }}" class="ml-2 text-indigo-600 hover:text-indigo-900">Edit</a>
                                             <a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>
                                         </td>
                                     </tr>
