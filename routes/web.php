@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
 Route::get('/adminsTable', [AdminController::class, 'index'])->name('adminIndex');
 Route::get('/produtsTable', [ProductController::class, 'index'])->name('productIndex');
-Route::get('/landingPage', [ProductController::class, 'index'])->name('index');
+Route::get('/landingPage', [ProductController::class, 'search'])->name('index');
 Route::get('/search', [ProductController::class, 'search'])->name('productsSearch');
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('user.productView');
 require __DIR__.'/auth.php';
