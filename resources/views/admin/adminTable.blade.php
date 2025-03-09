@@ -39,6 +39,9 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Actions
                                     </th>
+                                    <th>
+                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">+</button>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
