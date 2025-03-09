@@ -14,6 +14,7 @@
             </div>
         </div>
     </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -43,6 +44,7 @@
                             </thead>
                             <tbody>
                                 @foreach($products as $product)
+                                
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
