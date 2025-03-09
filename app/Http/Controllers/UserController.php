@@ -13,10 +13,9 @@ class UserController extends Controller
         return view('admin.userTable', compact('users'));
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        $users = User::all();
-        return view('admin.updateProfile', compact('users'));
+        return view('admin.updateProfile', compact('user'));
     }
 
     public function update(User $user, Request $request)

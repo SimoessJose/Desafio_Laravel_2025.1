@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <body class="bg-gradient-to-r from-indigo-800 to-blue-900 min-h-screen flex items-center justify-center p-4">
-        <form action="{{ route('updateUser', $users->id) }}" method="POST">
+        <form action="{{ route('updateUser', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div
@@ -36,9 +36,9 @@
                         </div>
                     </div>
 
-                    <!-- Bilgi Düzenleme Formu -->
+                    
                     <form class="space-y-4">
-                        <!-- İsim ve Unvan -->
+                        
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                             <input type="text" id="name"
@@ -52,7 +52,7 @@
                                 value="Software Developer">
                         </div>
 
-                        <!-- Organizasyon Bilgisi -->
+                      
                         <div>
                             <label for="organization"
                                 class="block text-sm font-medium text-gray-700">Organization</label>
@@ -61,7 +61,7 @@
                                 value="Estep Bilişim">
                         </div>
 
-                        <!-- İletişim Bilgileri -->
+                       
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                             <input type="email" id="email"
@@ -81,7 +81,7 @@
                                 value="San Francisco, CA">
                         </div>
 
-                        <!-- Kaydet ve İptal Butonları -->
+                      
                         <div class="flex justify-end space-x-4">
                             <button type="button"
                                 class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">Cancel</button>
