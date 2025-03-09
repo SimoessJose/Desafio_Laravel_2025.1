@@ -16,7 +16,7 @@ class AdminController extends Controller
         $admin = Auth::guard('admin')->user();
 
 
-        $admins = Admin::where('admin_id', $admin->id)->paginate(4);
+        $admins = Admin::where('admin_id', $admin->id)->paginate(10);
 
 
         return view('admin.adminTable', compact('admins'));
