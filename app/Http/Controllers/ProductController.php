@@ -55,6 +55,8 @@ public function search(Request $request)
 
 public function show(Product $product){ 
 
+
+    
     return view('user.productView', compact('product'));
 }
 

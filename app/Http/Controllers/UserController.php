@@ -12,4 +12,19 @@ class UserController extends Controller
         $users = User::paginate(10);
         return view('admin.userTable', compact('users'));
     }
+
+    public function edit()
+    {
+        $users = User::all();
+        return view('admin.updateProfile', compact('users'));
+    }
+
+    public function update(User $user, Request $request)
+    {
+        $data =$request->all();
+        $user->update($data);
+        $user->save();
+        return redirect()->route('updateUser');
+
+    }
 }
