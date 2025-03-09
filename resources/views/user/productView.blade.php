@@ -31,6 +31,11 @@
                                 <span
                                     class="text-gray-600 dark:text-gray-300">{{ $product->creator->name ?? 'Sistema' }}</span>
                             </div>
+                            <div>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">Contact announcer:</span>
+                                <span
+                                    class="text-gray-600 dark:text-gray-300">{{ $product->creator->number ?? 'Sistema' }}</span>
+                            </div>
                         </div>
                         <div>
                             <span class="font-bold text-gray-700 dark:text-gray-300">Product Description:</span>
@@ -38,7 +43,7 @@
                                 {{ $product->description }}
                             </p>
                         </div>
-                        
+
                         <div class="flex -mx-2 justify-center self-baseline">
                             <div class="w-1/2 px-2 mt-24">
                                 <button
