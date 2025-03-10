@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route::prefix('admin')->middleware('auth:admin')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
+// });
 
 Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
 Route::get('/adminsTable', [AdminController::class, 'index'])->name('adminIndex');
@@ -37,4 +42,7 @@ Route::get('/product/{product}', [ProductController::class, 'show'])->name('user
 Route::get('/updateProfile/{user}', [UserController::class, 'edit'])->name('editProfile');
 Route::get('/viewProfile/{user}', [UserController::class, 'view'])->name('viewProfile');
 Route::put('/updateProfile/{user}', [UserController::class, 'update'])->name('updateUser');
+Route::get('/createProfile', [UserController::class, 'viewCreateProfile'])->name('createProfile');
+Route::post('/store', [UserController::class, 'store'])->name('storeProfile');
+Route::delete('/delete/{user}', [UserController::class, 'destroy'])->name('deleteUser');
 require __DIR__.'/auth.php';
