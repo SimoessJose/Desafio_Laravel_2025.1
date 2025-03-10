@@ -23,7 +23,8 @@ class UserController extends Controller
         $data =$request->all();
         $user->update($data);
         $user->save();
-        return redirect()->route('updateUser');
+        
+         return redirect()->route('editProfile', $user->id);
 
     }
 }
