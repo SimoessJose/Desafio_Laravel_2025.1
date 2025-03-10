@@ -35,5 +35,6 @@ Route::get('/landingPage', [ProductController::class, 'search'])->name('index');
 Route::get('/search', [ProductController::class, 'search'])->name('productsSearch');
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('user.productView');
 Route::get('/updateProfile/{user}', [UserController::class, 'edit'])->name('editProfile');
+Route::get('/viewProfile/{user}', [UserController::class, 'view'])->name('viewProfile');
 Route::put('/updateProfile/{user}', [UserController::class, 'update'])->name('updateUser');
 require __DIR__.'/auth.php';
