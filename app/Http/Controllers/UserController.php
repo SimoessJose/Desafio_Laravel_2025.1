@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -20,18 +22,30 @@ class UserController extends Controller
     }
 
     public function view(User $user)
-    {       
+    {
         return view('admin.viewProfile', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
-        $data =$request->all();
-        $user->update($data);
-        $user->save();
-        
-         return redirect()->route('editProfile', $user->id);
+        $data = $request->except('image');
 
+
+        $user->update($data);
+
+        if ($request->hasFile('image')) {
+
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            $imagePath = $request->file('image')->store('profiles', 'public');
+
+            $user->image = $imagePath;
+            $user->save();
+        }
+
+        return redirect()->route('editProfile', $user->id);
     }
 
     public function viewCreateProfile()
@@ -61,5 +75,4 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back();
     }
-
 }
