@@ -18,6 +18,11 @@ class UserController extends Controller
         return view('admin.updateProfile', compact('user'));
     }
 
+    public function view(User $user)
+    {       
+        return view('admin.viewProfile', compact('user'));
+    }
+
     public function update(User $user, Request $request)
     {
         $data =$request->all();
