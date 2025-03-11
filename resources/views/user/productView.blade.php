@@ -61,10 +61,12 @@
             <form action="/checkout" method="POST">
                 @csrf
                 <input type="hidden" name="product" value="{{ json_encode($product) }}">
+                @if(is_user())
                 <button type="submit" class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold 
                                hover:bg-gray-800 dark:hover:bg-gray-700">
                     Buy
                 </button>
+                @endif
             </form>
         </div>
     </div>
