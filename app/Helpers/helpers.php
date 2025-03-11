@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 if (!function_exists('logged_user')) {
     function logged_user()
     {
-        return Auth::user();
+        return Auth::guard('web')->user();
     }
 }
 
