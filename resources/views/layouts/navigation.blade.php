@@ -16,6 +16,14 @@
                         {{ __('Landing Page') }}
                     </x-nav-link>
                 </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if(is_admin())
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('index')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                    @endif
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
