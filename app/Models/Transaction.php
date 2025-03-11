@@ -19,5 +19,9 @@ class Transaction extends Model
         'quantity',
         'date',
         'price',
+        //'reference_id',
+        //'status',
+        'product_id',
+        'buyer_id',
     ];
 }
