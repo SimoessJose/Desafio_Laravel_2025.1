@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->foreignId('buyer_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('buyer_id')->constrained('users');
+            $table->foreignId('product_id')->constrained();
             $table->date('date');
             $table->float('price');
             $table->timestamps();
