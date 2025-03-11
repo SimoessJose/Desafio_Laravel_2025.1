@@ -24,11 +24,6 @@
                             <a href="{{ route('productIndex') }}">Ir para Tabela de Gerenciamento de Produtos</a>
                         </button>
                     </div>
-                    <div>
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <a href="{{ route('index') }}">Ir para Landing Page</a>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
