@@ -51,7 +51,6 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('viewProfile', $user->id) }}" class="ml-2 text-green-600 hover:text-green-900">View</a>
                                             <a href="{{ route('editProfile', $user->id) }}" class="ml-2 text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            <!-- Botão de Delete que dispara o modal e define o ID do usuário a ser deletado -->
                                             <button type="button"
                                                 x-on:click.prevent="deleteUserId = {{ $user->id }}; $dispatch('open-modal', 'confirm-user-deletion')"
                                                 class="ml-2 text-red-600 hover:text-red-900">
@@ -70,9 +69,8 @@
             </div>
         </div>
 
-        <!-- Modal de Confirmação de Deleção -->
+        
         <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-            <!-- O atributo x-bind:action monta a URL de deleção dinamicamente -->
             <form method="post" x-bind:action="'{{ url('/delete') }}/' + deleteUserId" class="p-6">
                 @csrf
                 @method('delete')
