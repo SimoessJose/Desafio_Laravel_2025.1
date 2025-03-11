@@ -53,22 +53,29 @@ class UserController extends Controller
         return view('admin.createProfile');
     }
 
-    public function store(Request $request)
-    {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'date_birth' => $request->date_birth,
-            'password' => Hash::make($request->password),
-            'address' => $request->address,
-            'number' => $request->number,
-            'cpf' => $request->cpf,
-            'balance' => $request->balance,
-            'image' => $request->image,
-            'admin_id' => logged_admin()->id,
-        ]);
-        return redirect()->route('createProfile');
+    public function store(Request $request) 
+{
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('profiles', 'public');
+    } else {
+        $imagePath = null;
     }
+    
+    User::create([
+        'name'       => $request->name,
+        'email'      => $request->email,
+        'date_birth' => $request->date_birth,
+        'password'   => Hash::make($request->password),
+        'address'    => $request->address,
+        'number'     => $request->number,
+        'cpf'        => $request->cpf,
+        'balance'    => $request->balance,
+        'image'      => $imagePath,
+        'admin_id'   => logged_admin()->id,
+    ]);
+    
+    return redirect()->route('createProfile');
+}
 
     public function destroy(User $user)
     {
