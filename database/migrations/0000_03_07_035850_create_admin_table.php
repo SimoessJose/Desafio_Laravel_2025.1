@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('cpf')->unique();
             $table->string('image')->nullable();
-            $table->foreignId('admin_id')->nullable()->constrained()->onDelete('no action' );
+            $table->foreignId('admin_id')->nullable()->constrained()->onDelete('set null' );
             $table->rememberToken();
             $table->timestamps();
         });
