@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use function view;
 
@@ -65,42 +67,62 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProductRequest $request)
-    {
-        //
-    }
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
-        //
+        return view('admin.updateProduct', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Product $product, Request $request)
     {
-        //
+        $data = $request->except('image');
+
+
+        $product->update($data);
+
+        if ($request->hasFile('image')) {
+
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $imagePath = $request->file('image')->store('profiles', 'public');
+
+            $product->image = $imagePath;
+            $product->save();
+        }
+
+        return redirect()->route('editProductProfile', $product->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function viewCreateProfile()
+    {
+        return view('admin.createProduct');
+    }
+
+    public function store(Request $request) 
+{
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('profiles', 'public');
+    } else {
+        $imagePath = null;
+    }
+    
+    Product::create([
+        'name'       => $request->name,
+        'image'      => $imagePath,
+        'description'=> $request->description,
+        'price'      => $request->price,
+        'quantity'   => $request->quantity,
+        'category'   => $request->category,
+        'user_id'    => logged_user() || logged_admin(),
+    ]);
+    
+    return redirect()->route('productIndex');
+}
+
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back();
     }
 }
