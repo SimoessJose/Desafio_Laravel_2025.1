@@ -18,47 +18,51 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(8);
-    
-         if (Auth::guard('admin')->check()) {
-             return view('admin.productTable', compact('products'));
-         }
-        
+
+        if (Auth::guard('admin')->check()) {
+            return view('admin.productTable', compact('products'));
+        }
+
         return view('user.landingPage', compact('products'));
     }
 
 
-public function search(Request $request)
-{
-    $search = $request->input('query');   
-    $categoryId = $request->input('category');  
+    public function search(Request $request)
+    {
+        $search = $request->input('query');
+        $categoryId = $request->input('category');
 
-    $query = Product::query();
+        $query = Product::query();
 
-    if (!empty($search)) {
-        $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', "%{$search}%");
-        });
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            });
+        }
+
+        if (!empty($categoryId)) {
+            $query->where('category', $categoryId);
+        }
+
+        $products = $query->paginate(8);
+
+        $categories = Product::select('category')->distinct()->pluck('category');
+
+
+        return view('user.landingPage', compact('products', 'categories'));
     }
 
-    if (!empty($categoryId)) {
-        $query->where('category', $categoryId);
+
+    public function show(Product $product)
+    {
+
+        return view('user.productView', compact('product'));
     }
 
-    $products = $query->paginate(8);
-
-    $categories = Product::select('category')->distinct()->pluck('category');
-
-
-    return view('user.landingPage', compact('products', 'categories'));
-}
-
-
-public function show(Product $product){ 
-
-
-    
-    return view('user.productView', compact('product'));
-}
+    public function paymentError()
+    {
+        return view('user.paymentError');
+    }
 
 
     /**
