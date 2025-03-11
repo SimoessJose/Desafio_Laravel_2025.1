@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -27,11 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::prefix('admin')->middleware('auth:admin')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
-// });
 
 Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
 Route::get('/adminsTable', [AdminController::class, 'index'])->name('adminIndex');
@@ -45,4 +41,9 @@ Route::put('/updateProfile/{user}', [UserController::class, 'update'])->name('up
 Route::get('/createProfile', [UserController::class, 'viewCreateProfile'])->name('createProfile');
 Route::post('/store', [UserController::class, 'store'])->name('storeProfile');
 Route::delete('/delete/{user}', [UserController::class, 'destroy'])->name('deleteUser');
-require __DIR__.'/auth.php';
+Route::get('/payment-error', function () {
+    return view('user.paymentError');
+})->name('paymentError');
+Route::post('/checkout', [PagSeguroController::class, 'createCheckout'])->name('checkout');
+
+require __DIR__ . '/auth.php';
