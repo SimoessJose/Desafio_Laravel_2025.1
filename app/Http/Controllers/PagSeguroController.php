@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 //use Http;
 
 class PagSeguroController extends Controller
@@ -27,7 +29,7 @@ class PagSeguroController extends Controller
             'unit_amount' => $product['price'],
         ], $products);
 
-        
+
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
@@ -37,19 +39,23 @@ class PagSeguroController extends Controller
             'items' => $items,
         ]);
 
-        
+
 
         if ($response->successful()) {
+            $user = User::find(Auth::id());
+            $user->balance -= $products[0]['price'];
+            $user->save();
+
             Transaction::create([
                 'quantity' => $products[0]['quantity'],
                 'date' => now(),
                 'price' => $products[0]['price'],
                 'product_id' => $products[0]['id'],
-                'buyer_id' => logged_user()->id,
-            ]); 
-            
-            
-            $pay_link = data_get($response->json(),'links.1.href');
+                'buyer_id' => $user->id,
+            ]);
+
+
+            $pay_link = data_get($response->json(), 'links.1.href');
             return redirect()->away($pay_link);
         }
 
