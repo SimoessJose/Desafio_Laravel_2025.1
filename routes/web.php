@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Models\Admin;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,5 +46,22 @@ Route::get('/payment-error', function () {
     return view('user.paymentError');
 })->name('paymentError');
 Route::post('/checkout', [PagSeguroController::class, 'createCheckout'])->name('checkout');
+
+
+
+Route::get('/viewAdminProfile/{admin}', [AdminController::class, 'view'])->name('viewAdminProfile');
+Route::get('/createAdminProfile', [AdminController::class, 'viewCreateProfile'])->name('createAdminProfile');
+Route::delete('/delete-admin/{admin}', [AdminController::class, 'destroy'])->name('deleteAdmin');
+Route::post('/storeAdmin', [AdminController::class, 'store'])->name('storeAdminProfile');
+Route::get('/admin/updateAdminProfile/{admin}', [AdminController::class, 'edit'])->name('editAdminProfile');
+Route::put('/updateAdminProfile/{admin}', [AdminController::class, 'update'])->name('updateAdminProfile');
+
+
+Route::get('/createProductProfile', [ProductController::class, 'viewCreateProfile'])->name('createProductProfile');
+Route::delete('/delete-product/{product}', [ProductController::class, 'destroy'])->name('deleteProduct');
+Route::post('/storeProduct', [ProductController::class, 'store'])->name('storeProduct');
+Route::get('/admin/updateProductProfile/{product}', [ProductController::class, 'edit'])->name('editProductProfile');
+Route::put('/updateProductProfile/{product}', [ProductController::class, 'update'])->name('updateProductProfile');
+
 
 require __DIR__ . '/auth.php';
