@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('number')->unique();
             $table->string('cpf')->unique();
-            $table->float('balance');
-            $table->string('image')->nullable();
+            $table->float('balance')->default('0');
+            $table->string('image')->nullable()->default('');
             $table->foreignId('admin_id')->nullable()->constrained()->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
