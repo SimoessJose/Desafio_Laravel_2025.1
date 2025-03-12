@@ -49,13 +49,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach($products as $product)
-
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 h-10 w-10">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="{{ asset('storage/' . $product->image) }}" alt="">
+                                                        <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $product->image) }}" alt="">
                                                     </div>
                                                     <div class="ml-4">
                                                         <div class="text-sm font-medium text-gray-900">
@@ -64,30 +62,20 @@
                                                         <div class="text-sm text-gray-500">
                                                             {{ $product->creator->name ?? 'Sistema' }}
                                                         </div>
-
                                                     </div>
-
-                                                </div>
-
-                                            </td>
-
-
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <div class="text-sm text-gray-500">
-                                                    {{ $product->price }}
                                                 </div>
                                             </td>
+                                
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <div class="text-sm text-gray-500">
-                                                    {{ $product->category }}
-                                                </div>
+                                                {{ $product->price }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{ $product->category }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-wrap text-sm font-medium gap-20">
-                                                <a href="{{ route('user.productView', $product->id) }}"
-                                                    class="ml-2 text-green-600 hover:text-green-900">View</a>
-                                                <a href="{{ route('editProductProfile', $product->id) }}"
-                                                    class="ml-2 text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                    <button type="button"
+                                                <a href="{{ route('user.productView', $product->id) }}" class="ml-2 text-green-600 hover:text-green-900">View</a>
+                                                <a href="{{ route('editProductProfile', $product->id) }}" class="ml-2 text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                <button type="button"
                                                     x-on:click.prevent="deleteProductId = {{ $product->id }}; $dispatch('open-modal', 'confirm-product-deletion')"
                                                     class="ml-2 text-red-600 hover:text-red-900">
                                                     Delete
