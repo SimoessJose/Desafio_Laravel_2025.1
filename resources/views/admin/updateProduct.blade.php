@@ -14,9 +14,21 @@
                         <h2 class="mb-5 text-4xl font-bold text-blue-900">Update Product</h2>
                         <div class="text-center">
                             <div>
-                                <img id="profileImage" src="{{ asset('storage/' . $product->image)  }}" alt="Profile Picture"
-                                    class=" w-52 h-52 mx-auto border-4 border-indigo-800 mb-4 transition-transform duration-300 hover:scale-105 ring ring-gray-300">
-                                <input type="file" name="image" id="upload_profile" hidden onchange="previewImage(event)">
+
+                                @if (isset($user->image) && Storage::disk('public')->exists($user->image))
+
+                                    <img id="profileImage" src="{{ asset('storage/' . $product->image)  }}"
+                                        alt="Profile Picture"
+                                        class=" w-52 h-52 mx-auto border-4 border-indigo-800 mb-4 transition-transform duration-300 hover:scale-105 ring ring-gray-300">
+                                @else
+                                    <img id="profileImage"
+                                        src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
+                                        alt="Profile Picture"
+                                        class=" w-52 h-52 mx-auto border-4 border-indigo-800 mb-4 transition-transform duration-300 hover:scale-105 ring ring-gray-300">
+                                @endif
+
+                                <input type="file" name="image" id="upload_profile" hidden
+                                    onchange="previewImage(event)">
 
                                 <label for="upload_profile" class="inline-flex items-center">
                                     <svg data-slot="icon" class="w-5 h-5 text-blue-700" fill="none" stroke-width="1.5"
@@ -31,7 +43,7 @@
                                     </svg>
                                 </label>
                             </div>
-                            <button onclick="document.getElementById('upload_profile').click()" type="button" 
+                            <button onclick="document.getElementById('upload_profile').click()" type="button"
                                 class="bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300 ring ring-gray-300 hover:ring-indigo-300">
                                 Add Product Image
                             </button>
@@ -90,14 +102,14 @@
         function previewImage(event) {
             const input = event.target;
             const reader = new FileReader();
-    
+
             reader.onload = function () {
                 const imgElement = document.getElementById('profileImage');
-                imgElement.src = reader.result; 
+                imgElement.src = reader.result;
             };
-    
+
             if (input.files && input.files[0]) {
-                reader.readAsDataURL(input.files[0]); 
+                reader.readAsDataURL(input.files[0]);
             }
         }
     </script>
