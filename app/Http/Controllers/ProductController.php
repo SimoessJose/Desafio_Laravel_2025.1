@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\auth_admin;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -19,13 +20,13 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::paginate(8);
-
-        if (Auth::guard('admin')->check()) {
-            return view('admin.productTable', compact('products'));
+        if (logged_admin()) {
+            $products = Product::paginate(10); 
+        } else {
+            $products = Product::where('user_id', logged_user()->id)->paginate(10); 
         }
 
-        return view('user.landingPage', compact('products'));
+            return view('admin.productTable', compact('products'));
     }
 
 
