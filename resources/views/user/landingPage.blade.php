@@ -3,10 +3,20 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Landing') . " do Usuario: " }}
+            
         </h2>
     </x-slot>
 
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
+                <h2 class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">Welcome to my E-commerce</h2>
+                <p class="mb-4 font-light"></p>
+                <p class="mb-4 font-medium"></p>
+            </div>
+        </div>
+      </section>
+    
     <form action="{{ route('productsSearch') }}" method="GET" class="mb-4">
         @csrf
         <div class="py-12">
@@ -29,14 +39,14 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="p-6 text-gray-900 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div class=" p-6 text-gray-900 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @if(isset($products) && $products->count() > 0)
                         @foreach ($products as $product)
                             <div
-                                class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                class="w-full  max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                 <a href="#">
-                                    <img class="p-8 rounded-t-lg"
-                                        src="https://external-preview.redd.it/-Qte-gtF700QxZ9WemgtZtSCAvJs4T1ydwtq4Sg-u4M.jpg?width=640&crop=smart&auto=webp&s=de1b51ee876a4a62162cb49881017a2e75a3aedf"
+                                    <img class="p-8 rounded-t-lg bg-cover h-60 w-full object-cover"
+                                        src="{{ asset('storage/' . $product->image) }}"
                                         alt="product image" />
                                 </a>
                                 <div class="px-5 pb-5">
