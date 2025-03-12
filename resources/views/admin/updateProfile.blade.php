@@ -17,9 +17,9 @@
                         <h2 class="mb-5 text-4xl font-bold text-blue-900">Update Profile</h2>
                         <div class="text-center">
                             <div>
-                                <img src="{{ asset('storage/' . $user->image)  }}" alt="Profile Picture"
+                                <img id="profileImage" src="{{ asset('storage/' . $user->image)  }}" alt="Profile Picture"
                                     class="rounded-full w-32 h-32 mx-auto border-4 border-indigo-800 mb-4 transition-transform duration-300 hover:scale-105 ring ring-gray-300">
-                                <input type="file" name="image" id="upload_profile" hidden>
+                                <input type="file" name="image" id="upload_profile" hidden onchange="previewImage(event)">
 
                                 <label for="upload_profile" class="inline-flex items-center">
                                     <svg data-slot="icon" class="w-5 h-5 text-blue-700" fill="none" stroke-width="1.5"
@@ -34,7 +34,7 @@
                                     </svg>
                                 </label>
                             </div>
-                            <button
+                            <button onclick="document.getElementById('upload_profile').click()" type="button" 
                                 class="bg-indigo-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors duration-300 ring ring-gray-300 hover:ring-indigo-300">
                                 Change Profile Picture
                             </button>
@@ -118,5 +118,20 @@
     </body>
 
     </html>
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const reader = new FileReader();
+    
+            reader.onload = function () {
+                const imgElement = document.getElementById('profileImage');
+                imgElement.src = reader.result; 
+            };
+    
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]); 
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </x-app-layout>
