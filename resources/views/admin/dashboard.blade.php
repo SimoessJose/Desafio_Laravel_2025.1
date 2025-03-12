@@ -33,7 +33,13 @@
                                 <a href="{{ route('withdrawView', logged_user()->id) }}">Ir para Area de Saque</a>
                             </button>
                         </div>
-                    @endif    
+                       
+                        <div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ route('purchase') }}">Ir para Area de Gerenciamento de Compras</a>
+                            </button>
+                        </div>
+                    @endif  
                 </div>
             </div>
         </div>
