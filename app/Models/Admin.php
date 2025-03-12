@@ -53,8 +53,4 @@ class Admin extends Authenticatable
     public function creator(){
         return $this->belongsTo(Admin::class, 'admin_id');
     }
-
-    public function subordinates(){
-        return $this->hasMany(Admin::class, 'admin_id');
-    }
 }
