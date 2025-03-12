@@ -11,9 +11,16 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function purchase()
     {
-        //
+        $products = Transaction::where('buyer_id', logged_user()->id)->with('product')->paginate(10);
+        
+        return view('user.purchaseTable', compact('products'));
+    }
+
+    public function sales()
+    {
+        
     }
 
     /**

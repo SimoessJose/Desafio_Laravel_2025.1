@@ -30,10 +30,3 @@ if (!function_exists('is_user')) {
         return Auth::guard('web')->check();
     }
 }
-
-if (!function_exists('is_logged_in')) {
-    function is_logged_in()
-    {
-        return Auth::guard('web')->check() || Auth::guard('admin')->check();
-    }
-}
