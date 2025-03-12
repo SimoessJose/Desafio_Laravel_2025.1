@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class UserController extends Controller
 {
     public function index()
@@ -100,6 +103,43 @@ class UserController extends Controller
     
     return redirect()->route('createProfile');
 }
+
+public function registerUser(Request $request)
+{
+    $validatedData = $request->validate([
+        'name'       => 'required|string|max:255',
+        'email'      => 'required|string|email|max:255|unique:users',
+        'date_birth' => 'required|date',
+        'password'   => 'required|string',
+        'address'    => 'nullable|string|max:255',
+        'number'     => 'required|string|max:15|unique:users,number',
+        'cpf'        => 'required|string|max:14|unique:users,cpf',
+        'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('profiles', 'public');
+    } else {
+        $imagePath = null;
+    }
+
+    $user = User::create([
+        'name'       => $validatedData['name'],
+        'email'      => $validatedData['email'],
+        'date_birth' => $validatedData['date_birth'],
+        'password'   => Hash::make($validatedData['password']),
+        'address'    => $validatedData['address'] ?? null,
+        'number'     => $validatedData['number'],
+        'cpf'        => $validatedData['cpf'],
+        'image'      => $imagePath,
+        'admin_id'   => 1,
+    ]);
+
+    Auth::login($user);
+
+    return redirect()->route('index');
+}
+
 
     public function destroy(User $user)
     {
