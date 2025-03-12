@@ -26,6 +26,30 @@ class UserController extends Controller
         return view('admin.viewProfile', compact('user'));
     }
 
+    public function withdraw(User $user, Request $request)
+    {
+        $data = $request->validate([
+            'balance' => 'required|numeric',
+        ]);
+        
+        
+        if ($user->balance < $data['balance']) {
+            return back()->withErrors(['balance' => 'Insufficient balance for withdrawal.']);
+        }
+
+    
+        $user->balance -= $data['balance'];
+        $user->save();
+    
+
+        return redirect()->route('withdrawView', $user->id);
+    }
+
+    public function withdrawView(User $user)
+    {
+        return view('user.withdraw', compact('user'));
+    }
+
     public function update(User $user, Request $request)
     {
         $data = $request->except('image');
