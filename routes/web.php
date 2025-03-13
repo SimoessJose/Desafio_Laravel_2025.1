@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
-use App\Models\Admin;
+use App\Http\Controllers\TransactionController;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Transaction;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,7 +41,7 @@ Route::middleware('auth_admin')->group(function(){
     Route::get('/admin/updateAdminProfile/{admin}', [AdminController::class, 'edit'])->name('editAdminProfile');
     Route::put('/updateAdminProfile/{admin}', [AdminController::class, 'update'])->name('updateAdminProfile');
     Route::get('/createProfile', [UserController::class, 'viewCreateProfile'])->name('createProfile');
-    Route::post('/store', [UserController::class, 'store'])->name('storeProfile');
+    Route::post('/storeProfile', [UserController::class, 'store'])->name('storeProfile');
     
 });
 
@@ -64,5 +68,18 @@ Route::put('/updateProductProfile/{product}', [ProductController::class, 'update
 
 Route::get('/withdraw/{user}', [UserController::class, 'withdrawView'])->name('withdrawView');
 Route::put('/withdraw/{user}', [UserController::class, 'withdraw'])->name('withdraw');
+
+Route::post('/store', [UserController::class, 'registerUser'])->name('registerProfile');
+
+Route::get('/purchase', [TransactionController::class, 'purchase'])->name('purchase');
+
+Route::get('/relatorio', function () {
+
+    $products = Transaction::where('buyer_id', logged_user()->id)->with('product')->get();
+
+    $pdf = Pdf::loadView('user.purchase-pdf', compact('products'));
+    return $pdf->stream('Relatorio_Compras.pdf');
+})->name('relatorio');
+
 
 require __DIR__ . '/auth.php';
