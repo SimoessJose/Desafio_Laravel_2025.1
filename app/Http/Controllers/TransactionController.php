@@ -13,14 +13,24 @@ class TransactionController extends Controller
      */
     public function purchase()
     {
-        $products = Transaction::where('buyer_id', logged_user()->id)->with('product')->paginate(10);
+        $products = Transaction::where('buyer_id', logged_user()->id)->paginate(10);
         
         return view('user.purchaseTable', compact('products'));
     }
 
     public function sales()
-    {
-        
+    {   
+        if(is_admin()) {
+            $salesAll = Transaction::paginate(10);
+            return view('user.salesTable', compact('salesAll'));
+        }else{
+
+            $sales = Transaction::whereHas('product', function ($query) {
+                $query->where('user_id', logged_user()->id);
+            })->paginate(10);
+            
+            return view('user.salesTable', compact('sales'));
+        }
     }
 
     /**
