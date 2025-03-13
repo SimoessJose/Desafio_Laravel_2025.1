@@ -107,6 +107,7 @@ class ProductController extends Controller
     } else {
         $imagePath = null;
     }
+
     
     Product::create([
         'name'       => $request->name,
@@ -115,7 +116,7 @@ class ProductController extends Controller
         'price'      => $request->price,
         'quantity'   => $request->quantity,
         'category'   => $request->category,
-        'user_id'    => logged_user() || logged_admin(),
+        'user_id'    => logged_user()->id,
     ]);
     
     return redirect()->route('productIndex');
