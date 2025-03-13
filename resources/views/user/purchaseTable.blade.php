@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,17 +35,20 @@
                                     Sale Date
                                 </th>
                                 <th class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="{{ route('relatorio') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Gerar Relatório</a>
+                                    <a href="{{ route('relatorioCompras') }}"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        target="_blank">Gerar Relatório</a>
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach($products as $transaction)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full"
+                                            <div class="flex-shrink-0">
+                                                <img class="h-20 w-30"
                                                     src="{{ asset('storage/' . $transaction->product->image) }}" alt="">
                                             </div>
                                             <div class="ml-4">
