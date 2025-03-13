@@ -9,7 +9,6 @@
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid black; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
-        img { max-width: 50px; height: auto; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -29,10 +28,7 @@
         <tbody>
             @foreach($products as $transaction)
                 <tr>
-                    <td>
-                        <img src="{{ public_path('storage/' . $transaction->product->image) }}" alt="Produto">
-                        {{ $transaction->product->name }}
-                    </td>
+                    <td>{{ $transaction->product->name }}</td>
                     <td>R$ {{ number_format($transaction->product->price, 2, ',', '.') }}</td>
                     <td>{{ $transaction->product->category }}</td>
                     <td>{{ $transaction->product->creator->name ?? 'Sistema' }}</td>
