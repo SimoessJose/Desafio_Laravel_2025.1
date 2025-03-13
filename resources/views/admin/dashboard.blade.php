@@ -39,7 +39,13 @@
                                 <a href="{{ route('purchase') }}">Ir para Area de Gerenciamento de Compras</a>
                             </button>
                         </div>
-                    @endif  
+
+                        @endif  
+                        <div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ route('sales') }}">Ir para Area de Gerenciamento de Vendas</a>
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>
