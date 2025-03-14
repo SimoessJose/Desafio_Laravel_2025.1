@@ -76,7 +76,8 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        @else
+                        @endif
+                        @if (is_admin())
                             <tbody>
                                 @foreach($salesAll as $transaction)
                                     <tr>

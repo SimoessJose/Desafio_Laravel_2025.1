@@ -91,7 +91,7 @@ Route::middleware(Auth_User_AdminMiddleware::class)->group(function () {
     Route::get('/relatorioVendas', function () {
 
         if (is_admin()) {
-            $sales = Transaction::paginate(10);
+            $sales = Transaction::all();
             $pdf = Pdf::loadView('user.sales-pdf', compact('sales'));
             return $pdf->stream('Relatorio_Vendas.pdf');
         } else {
