@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('description');
-            $table->float('price');
+            $table->decimal('price', 12, 2);
             $table->integer('quantity');
             $table->string('category');
             $table->foreignId('user_id')->constrained()->onDelete('cascade' );
