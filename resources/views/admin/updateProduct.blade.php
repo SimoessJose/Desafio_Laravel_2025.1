@@ -15,7 +15,7 @@
                         <div class="text-center">
                             <div>
 
-                                @if (isset($user->image) && Storage::disk('public')->exists($user->image))
+                                @if (isset($product->image) && Storage::disk('public')->exists($product->image))
 
                                     <img id="profileImage" src="{{ asset('storage/' . $product->image)  }}"
                                         alt="Profile Picture"
@@ -25,8 +25,8 @@
                                         src="https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.webp"
                                         alt="Profile Picture"
                                         class=" w-52 h-52 mx-auto border-4 border-indigo-800 mb-4 transition-transform duration-300 hover:scale-105 ring ring-gray-300">
-                                @endif
 
+                                @endif
                                 <input type="file" name="image" id="upload_profile" hidden
                                     onchange="previewImage(event)">
 
@@ -70,9 +70,9 @@
                     </div>
                     <div>
                         <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                        <input type="text" name="quantity" id="quantity"
+                        <input type="number" name="quantity" id="quantity"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                            value="{{$product->quatity}}">
+                            value="{{$product->quantity}}">
                     </div>
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
