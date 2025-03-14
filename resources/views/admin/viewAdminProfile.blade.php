@@ -24,26 +24,26 @@
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                        <input type="text" name="name" id="name"
+                        <input type="text" name="name" id="name" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$admin->name}}">
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email" id="email"
+                        <input type="email" name="email" id="email" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$admin->email}}">
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password" id="password"
+                        <input type="password" name="password" id="password" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$admin->password}}">
                     </div>
                     <div>
                         <label for="Address" class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" name="address" id="address"
+                        <input type="text" name="address" id="address" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$admin->address}}">
                     </div>
@@ -51,13 +51,13 @@
 
                     <div>
                         <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                        <input type="tel" name="number" id="phone"
+                        <input type="tel" name="number" id="phone" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$admin->number}}">
                     </div>
                     <div>
                         <label for="location" class="block text-sm font-medium text-gray-700">CPF</label>
-                        <input type="text" name="cpf" id="cpf"
+                        <input type="text" name="cpf" id="cpf" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{ $admin->cpf }}">
                     </div>
@@ -65,7 +65,7 @@
 
                     <div>
                         <label for="location" class="block text-sm font-medium text-gray-700">Datebirth</label>
-                        <input type="date" name="date_birth" id="datebirth"
+                        <input type="date" name="date_birth" id="datebirth" disabled
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{ $admin->date_birth }}">
                     </div>
