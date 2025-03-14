@@ -19,16 +19,8 @@
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
-                    
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    
-                    <x-nav-link :href="route('contact.index')" :active="request()->routeIs('index')">
-                        {{ __('Contact') }}
                     </x-nav-link>
                     
                 </div>
@@ -39,11 +31,11 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            @if (Auth::guard('web')->check())
+                            @if (is_user())
                                 <div>{{ Auth::guard('web')->user()->name }}</div>
                             @endif
 
-                            @if (Auth::guard('admin')->check())
+                            @if (is_admin())
                                 <div>{{ Auth::guard('admin')->user()->name }}</div>
                             @endif
 
@@ -56,10 +48,18 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @if(is_user())
+                            <x-dropdown-link :href=" route('editProfile', logged_user()->id)">
+                                {{ __('Edit Profile') }}
+                            </x-dropdown-link>
+                            
+                            <x-dropdown-link :href=" route('viewProfile', logged_user()->id)">
+                                {{ __('View Profile') }}
+                            </x-dropdown-link>
+                        @endif
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Delete Account') }}
                         </x-dropdown-link>
-
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -90,6 +90,9 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                {{ __('Landing Page') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
@@ -102,8 +105,18 @@
             </div>
 
             <div class="mt-3 space-y-1">
+               @if(is_user())
+                    <x-responsive-nav-link :href=" route('editProfile', logged_user()->id)">
+                    {{ __('Edit Profile') }}
+                    </x-responsive-nav-link>
+                    
+                    <x-responsive-nav-link :href=" route('viewProfile', logged_user()->id)">
+                        {{ __('View Profile') }}
+                    </x-responsive-nav-link>
+                @endif
+                
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Delete Account') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
