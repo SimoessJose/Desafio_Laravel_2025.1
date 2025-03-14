@@ -21,7 +21,7 @@
                     @error('balance')
                         <p class="text-red-500 text-xs mb-1">{{ $message }}</p>
                     @enderror
-                    <input type="number" name="balance" step="any" placeholder="Enter amount"
+                    <input type="number" name="balance" step="any" placeholder="Enter amount" min="1" max="{{ $user->balance }}"
                         class="w-full p-2.5 text-sm rounded-lg border border-gray-600 bg-gray-700 text-white focus:ring-blue-500 focus:border-blue-500 shadow-md" />
                 </div>
 
