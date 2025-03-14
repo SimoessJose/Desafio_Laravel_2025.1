@@ -62,13 +62,6 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                             value="{{$user->password}}">
                     </div>
-
-                    <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Balance</label>
-                        <input type="text" name="balance" id="balance"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                            value="{{ $user->balance }}">
-                    </div>
                     <div>
                         <label for="Address" class="block text-sm font-medium text-gray-700">Address</label>
                         <input type="text" name="address" id="address"
