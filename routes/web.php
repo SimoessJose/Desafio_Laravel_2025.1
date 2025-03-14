@@ -48,8 +48,9 @@ Route::middleware(auth_admin::class)->group(function () {
     Route::put('/updateAdminProfile/{admin}', [AdminController::class, 'update'])->name('updateAdminProfile');
     Route::get('/createProfile', [UserController::class, 'viewCreateProfile'])->name('createProfile');
     Route::post('/storeProfile', [UserController::class, 'store'])->name('storeProfile');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/contact/{user}', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact/{user}', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
 });
 
 
@@ -75,13 +76,12 @@ Route::middleware(auth_user::class)->group(function () {
 
 Route::middleware(Auth_User_AdminMiddleware::class)->group(function () {
 
-    Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
     Route::get('/produtsTable', [ProductController::class, 'index'])->name('productIndex');
     Route::get('/landingPage', [ProductController::class, 'search'])->name('index');
     Route::get('/search', [ProductController::class, 'search'])->name('productsSearch');
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('user.productView');
-    Route::get('/updateProfile/{user}', [UserController::class, 'edit'])->name('editProfile');
     Route::get('/viewProfile/{user}', [UserController::class, 'view'])->name('viewProfile');
+    Route::get('/updateProfile/{user}', [UserController::class, 'edit'])->name('editProfile');
     Route::put('/updateProfile/{user}', [UserController::class, 'update'])->name('updateUser');
     Route::delete('/delete/{user}', [UserController::class, 'destroy'])->name('deleteUser');
     Route::put('/updateProductProfile/{product}', [ProductController::class, 'update'])->name('updateProductProfile');
@@ -104,9 +104,9 @@ Route::middleware(Auth_User_AdminMiddleware::class)->group(function () {
             return $pdf->stream('Relatorio_Vendas.pdf');
         }
     })->name('relatorioVendas');
-    Route::post('/store', [UserController::class, 'registerUser'])->name('registerProfile');
 });
 
+Route::post('/store', [UserController::class, 'registerUser'])->name('registerProfile');
 
 
 
