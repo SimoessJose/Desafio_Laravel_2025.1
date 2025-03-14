@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    const ITEMS_PER_PAGE = 6;
     public function index()
     {
         $users = User::paginate(10);
