@@ -16,6 +16,8 @@ class ContactController extends Controller
 
     public function store(Request $request, User $user){
         
+        $recipient = User::find($user->id);
+        
         $data = [
             'fromName' => logged_admin()->name,
             'fromEmail' => logged_admin()->email,
@@ -24,7 +26,7 @@ class ContactController extends Controller
 
         ];
 
-        $sent = Mail::to($request->input('email'),$request->input('name'))->send(new Contact($data));
+        Mail::to($recipient->email,$recipient->name)->send(new Contact($data));
 
         return redirect()->back();
     }
