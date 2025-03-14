@@ -23,9 +23,11 @@
                 <th>Preço</th>
                 <th>Categoria</th>
                 <th>Vendedor</th>
+                <th>Comprador</th>
                 <th>Data da Compra</th>
             </tr>
         </thead>
+        
         <tbody>
             @foreach($sales as $transaction)
                 <tr>
@@ -33,6 +35,7 @@
                     <td>R$ {{ number_format($transaction->product->price, 2, ',', '.') }}</td>
                     <td>{{ $transaction->product->category }}</td>
                     <td>{{ $transaction->product->creator->name ?? 'Sistema' }}</td>
+                    <td>{{ $transaction->buyer->name ?? 'Sistema'}}</td>
                     <td>{{ \Carbon\Carbon::parse($transaction->date)->format('d/m/Y') }}</td>
                 </tr>
             @endforeach
