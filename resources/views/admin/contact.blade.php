@@ -1,12 +1,12 @@
 <x-app-layout>
 
-
-    <section class="bg-white dark:bg-gray-900">
-        <form action="{{ route('contact.store', $user->id) }}" method="POST">
-            @csrf
-            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
-                    Contact User</h2>
+    <div class="max-w-2xl mx-auto px-6">
+        <section class="bg-white dark:bg-gray-900 ">
+            <form action="{{ route('contact.store', $user->id) }}" method="POST">
+                @csrf
+                <div class="py-8 lg:py-16 px-4 max-w-screen-md">
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+                        Contact User</h2>
 
                     <div>
                         <label for="name"
@@ -39,8 +39,9 @@
                         class="py-3 px-5 text-sm bg-blue-500 font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send
                         message</button>
 
-            </div>
-        </form>
-    </section>
+                </div>
+            </form>
+        </section>
+    </div>
 
 </x-app-layout>

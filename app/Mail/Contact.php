@@ -20,7 +20,7 @@ class Contact extends Mailable
      */
     public function __construct(public array $data)
     {
-    
+        
     }
 
     /**

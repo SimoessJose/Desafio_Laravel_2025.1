@@ -27,7 +27,7 @@
                 <th>Data da Compra</th>
             </tr>
         </thead>
-        
+
         <tbody>
             @foreach($sales as $transaction)
                 <tr>

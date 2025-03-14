@@ -9,7 +9,7 @@
 
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div class="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
+            <div class="max-w-screen text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white text-center">Welcome!
                 </h2>
                 <p class="mb-4 font-light"></p>
@@ -23,9 +23,9 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"></div>
-                <div class="flex gap-4">
+                <div class="flex gap-4 justify-center">
                     <input type="text" name="query" id="table-search" value="{{ request()->input('query') }}"
-                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class=" p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-[20%] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search for items"><button type="submit"
                         class="px-4 py-2 bg-gray-700 text-white rounded-lg">Buscar</button>
 
