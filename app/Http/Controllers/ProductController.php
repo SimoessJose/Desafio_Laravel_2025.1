@@ -47,7 +47,7 @@ class ProductController extends Controller
             $query->where('category', $categoryId);
         }
 
-        $products = $query->paginate(8);
+        $products = $query->where('quantity', '>', 0)->paginate(8);
 
         $categories = Product::select('category')->distinct()->pluck('category');
 
