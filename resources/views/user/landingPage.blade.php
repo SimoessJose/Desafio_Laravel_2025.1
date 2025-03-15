@@ -44,7 +44,6 @@
                 <div class=" p-6 text-gray-900 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @if(isset($products) && $products->count() > 0)
                         @foreach ($products as $product)
-                            @if($product->quantity != 0)
                                 <div
                                     class="w-full  max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                     <a href="#">
@@ -65,7 +64,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
                         @endforeach
 
                     @else

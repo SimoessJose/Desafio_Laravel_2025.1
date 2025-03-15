@@ -73,11 +73,15 @@
 
                 @csrf
                 <input type="hidden" name="product" value="{{ json_encode($product) }}">
-                @if(is_user())
-
-                    <button type="submit" class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold 
-                                       hover:bg-gray-800 dark:hover:bg-gray-700">Buy</button>
+                @if(is_user() && logged_user()->id != $product->creator->id)
+                    @if($product->quantity == 0)
+                        <p class="text-center text-red-500">Out of stock!</p>
+                    @endif
+                    <button type="submit"
+                        class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Buy</button>
                 @endif
+
+
     </form>
     </div>
     </div>
