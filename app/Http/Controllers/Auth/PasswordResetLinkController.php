@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class PasswordResetLinkController extends Controller
 {
@@ -35,6 +36,14 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
+
+        $status = Password::broker('admins')->sendResetLink(
+            $request->only('email')
+        );
+
+        if($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', __($status));
+        }
 
         return $status == Password::RESET_LINK_SENT
                     ? back()->with('status', __($status))
