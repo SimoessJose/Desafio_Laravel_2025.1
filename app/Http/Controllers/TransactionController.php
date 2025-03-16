@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
@@ -18,6 +19,14 @@ class TransactionController extends Controller
         return view('user.purchaseTable', compact('products'));
     }
 
+    public function purchasePdf()
+    {
+        $products = Transaction::where('buyer_id', logged_user()->id)->with('product')->get();
+
+        $pdf = Pdf::loadView('user.purchase-pdf', compact('products'));
+        return $pdf->stream('Relatorio_Compras.pdf');
+    }
+
     public function sales()
     {   
         if(is_admin()) {
@@ -30,6 +39,23 @@ class TransactionController extends Controller
             })->paginate(10);
             
             return view('user.salesTable', compact('sales'));
+        }
+    }
+
+    public function salesPdf()
+    {
+        if (is_admin()) {
+            $sales = Transaction::all();
+            $pdf = Pdf::loadView('user.sales-pdf', compact('sales'));
+            return $pdf->stream('Relatorio_Vendas.pdf');
+        } else {
+
+            $sales = Transaction::whereHas('product', function ($query) {
+                $query->where('user_id', logged_user()->id);
+            })->get();
+
+            $pdf = Pdf::loadView('user.sales-pdf', compact('sales'));
+            return $pdf->stream('Relatorio_Vendas.pdf');
         }
     }
 

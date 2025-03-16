@@ -64,13 +64,7 @@ Route::middleware(auth_user::class)->group(function () {
     Route::get('/withdraw/{user}', [UserController::class, 'withdrawView'])->name('withdrawView');
     Route::put('/withdraw/{user}', [UserController::class, 'withdraw'])->name('withdraw');
     Route::get('/purchase', [TransactionController::class, 'purchase'])->name('purchase');
-    Route::get('/relatorioCompras', function () {
-
-        $products = Transaction::where('buyer_id', logged_user()->id)->with('product')->get();
-
-        $pdf = Pdf::loadView('user.purchase-pdf', compact('products'));
-        return $pdf->stream('Relatorio_Compras.pdf');
-    })->name('relatorioCompras');
+    Route::get('/relatorioCompras', [TransactionController::class, 'purchasePdf'])->name('relatorioCompras');
 });
 
 
@@ -88,22 +82,7 @@ Route::middleware(Auth_User_AdminMiddleware::class)->group(function () {
     Route::get('/admin/updateProductProfile/{product}', [ProductController::class, 'edit'])->name('editProductProfile');
     Route::delete('/delete-product/{product}', [ProductController::class, 'destroy'])->name('deleteProduct');
     Route::get('/sales', [TransactionController::class, 'sales'])->name('sales');
-    Route::get('/relatorioVendas', function () {
-
-        if (is_admin()) {
-            $sales = Transaction::all();
-            $pdf = Pdf::loadView('user.sales-pdf', compact('sales'));
-            return $pdf->stream('Relatorio_Vendas.pdf');
-        } else {
-
-            $sales = Transaction::whereHas('product', function ($query) {
-                $query->where('user_id', logged_user()->id);
-            })->get();
-
-            $pdf = Pdf::loadView('user.sales-pdf', compact('sales'));
-            return $pdf->stream('Relatorio_Vendas.pdf');
-        }
-    })->name('relatorioVendas');
+    Route::get('/relatorioVendas', [TransactionController::class, 'salesPdf'])->name('relatorioVendas');
 });
 
 Route::post('/store', [UserController::class, 'registerUser'])->name('registerProfile');
