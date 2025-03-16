@@ -42,10 +42,12 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Actions
                                             </th>
+                                        @if(is_user())
                                             <th>
                                                 <a href="{{ route('createProductProfile') }}"
                                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</a>
                                             </th>
+                                        @endif
                                         </tr>
                                     </thead>
                                     <tbody>
