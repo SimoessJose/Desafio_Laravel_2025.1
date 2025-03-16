@@ -26,7 +26,7 @@ class AdminSeeder extends Seeder
             'admin_id' => null, 
         ]);
 
-        Admin::factory(10)->create();
+        Admin::factory(6)->create();
 
         Admin::factory()->create([
             'name' => 'Test User',

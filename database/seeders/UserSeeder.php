@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'admin_id' => Admin::inRandomOrder()->value('id'),
         ]);
 
-        User::factory(10)->create();
+        User::factory(18)->create();
 
         User::factory()->create([
             'name' => 'Test User',
