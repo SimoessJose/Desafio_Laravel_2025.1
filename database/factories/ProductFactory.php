@@ -31,8 +31,9 @@ class ProductFactory extends Factory
             'price' => fake()->randomFloat(2, 1, 9999),
             'image' => '',
             'quantity' => fake()->randomNumber(2),
-            'category' => fake()->word(),
+            'category' => fake()->randomElement(['Eletrônicos', 'Roupas', 'Alimentos', 'Móveis', 'Brinquedos']),
             'user_id' => User::inRandomOrder()->value('id'),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

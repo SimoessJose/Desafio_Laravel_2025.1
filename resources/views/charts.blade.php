@@ -1,8 +1,9 @@
 <x-app-layout>
+
     <x-slot name="header">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($chart1->options['chart_title']) }}
+            {{ __('Gráficos') }}
         </h2>
     </x-slot>
 
@@ -12,20 +13,16 @@
                 <div class="overflow-x-auto">
                     <div class="p-6 text-gray-900">
 
-                        <div class="max-w-md mx-auto">
-                        </div>
-                        {!! $chart1->renderHtml() !!}
+                        <h1 class="text-2xl font-bold mb-4"></h1>
+                        {!! $chart->renderHtml() !!}
 
-                        {!! $chart1->renderChartJsLibrary() !!}
-                        {!! $chart1->renderJs() !!}
-
-
+                        {!! $chart->renderChartJsLibrary() !!}
+                        {!! $chart->renderJs() !!}
+                        
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 
 </x-app-layout>

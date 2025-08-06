@@ -37,6 +37,7 @@ class UserFactory extends Factory
             'image' => '',
             'balance' => 0,
             'admin_id' => Admin::inRandomOrder()->value('id'),
+            'created_at' => fake()->dateTimeBetween('-30 days'),
         ];
     }
 

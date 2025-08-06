@@ -11,6 +11,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\auth_user;
 use App\Http\Middleware\auth_admin;
 use App\Http\Middleware\Auth_User_AdminMiddleware;
+use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Transaction;
@@ -50,7 +51,7 @@ Route::middleware(auth_admin::class)->group(function () {
     Route::post('/storeProfile', [UserController::class, 'store'])->name('storeProfile');
     Route::get('/contact/{user}', [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact/{user}', [ContactController::class, 'store'])->name('contact.store');
-    Route::get('/usersTable', [UserController::class, 'index'])->name('userIndex');
+    Route::get('/charts', [ChartController::class, 'index'])->name('chart.index');
 });
 
 
