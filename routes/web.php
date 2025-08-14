@@ -30,6 +30,7 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
+Route::get('/charts', [ChartController::class, 'index'])->name('chart.index');
 
 
 Route::middleware('auth')->group(function () {
@@ -51,7 +52,6 @@ Route::middleware(auth_admin::class)->group(function () {
     Route::post('/storeProfile', [UserController::class, 'store'])->name('storeProfile');
     Route::get('/contact/{user}', [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact/{user}', [ContactController::class, 'store'])->name('contact.store');
-    Route::get('/charts', [ChartController::class, 'index'])->name('chart.index');
 });
 
 

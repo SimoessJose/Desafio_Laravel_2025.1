@@ -19,17 +19,21 @@ class ChartController extends Controller
 {
     public function index()
     {
-        //Produtos Cadastrados por Mes
-        $chart_options = [
-        'chart_title'        => 'Produtos Cadastrados por Mes',
-        'model'              => Product::class,  
-        'chart_type'         => 'pie',                       
-        'report_type'        => 'group_by_date',                
-        'group_by_field'     => 'created_at',                    
-        'group_by_period'    => 'month',
-        'top_results'        => 5,
-        'chart_color'         => '0,122,255',               
-        ];
+
+          $loggedUserId = logged_user()->id;
+
+    $chart_options = [
+        'chart_title'     => 'Minhas Vendas por Mês',
+        'report_type'     => 'group_by_date',
+        'model'           => 'App\Models\Transaction',
+        'group_by_field'  => 'created_at',
+        'group_by_period' => 'month',
+        'chart_type'      => 'line',
+
+
+        // Filtra vendas cujos produtos foram criados pelo usuário logado
+        'where_raw'       => "product_id IN (SELECT id FROM products WHERE user_id = {$loggedUserId})",
+    ];
 
         $chart = new LaravelChart($chart_options);
 
